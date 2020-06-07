@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import AVKit
 
 class MediaData: ObservableObject {
-    @Published var title = ""
+    @Published var title: String? = nil
+    @Published var videoPlayer: VideoPlayer? = nil
 }

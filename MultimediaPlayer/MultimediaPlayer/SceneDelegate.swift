@@ -94,6 +94,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
             
             mediaData.title = mc.loadMedia(url: url)!
+            
+            let videoExtensions = ["mp4", "mov", "m4v"]
+            if (videoExtensions.contains(url.pathExtension)) {
+                mediaData.videoPlayer = mc.loadVideoPlayer()
+            } else {
+                mediaData.videoPlayer = nil
+            }
         }
     }
     
