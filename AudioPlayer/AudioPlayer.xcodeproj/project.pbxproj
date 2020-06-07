@@ -14,6 +14,8 @@
 		8495C73D248BDB880043C1FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8495C73C248BDB880043C1FE /* Preview Assets.xcassets */; };
 		8495C740248BDB880043C1FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8495C73E248BDB880043C1FE /* LaunchScreen.storyboard */; };
 		8495C749248BE10E0043C1FE /* alright-radio-edit-kendrick-lamar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8495C748248BE10E0043C1FE /* alright-radio-edit-kendrick-lamar.mp3 */; };
+		84EB40AD248C81B60003D206 /* MediaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB40AC248C81B60003D206 /* MediaController.swift */; };
+		84EB40B2248CA6420003D206 /* MediaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB40B1248CA6420003D206 /* MediaData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		8495C73F248BDB880043C1FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8495C741248BDB880043C1FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8495C748248BE10E0043C1FE /* alright-radio-edit-kendrick-lamar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "alright-radio-edit-kendrick-lamar.mp3"; sourceTree = "<group>"; };
+		84EB40AC248C81B60003D206 /* MediaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaController.swift; sourceTree = "<group>"; };
+		84EB40B1248CA6420003D206 /* MediaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 				8495C733248BDB860043C1FE /* AppDelegate.swift */,
 				8495C735248BDB860043C1FE /* SceneDelegate.swift */,
 				8495C737248BDB860043C1FE /* ContentView.swift */,
+				84EB40AC248C81B60003D206 /* MediaController.swift */,
+				84EB40B1248CA6420003D206 /* MediaData.swift */,
 				8495C739248BDB880043C1FE /* Assets.xcassets */,
 				8495C73E248BDB880043C1FE /* LaunchScreen.storyboard */,
 				8495C741248BDB880043C1FE /* Info.plist */,
@@ -158,6 +164,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84EB40B2248CA6420003D206 /* MediaData.swift in Sources */,
+				84EB40AD248C81B60003D206 /* MediaController.swift in Sources */,
 				8495C734248BDB860043C1FE /* AppDelegate.swift in Sources */,
 				8495C736248BDB860043C1FE /* SceneDelegate.swift in Sources */,
 				8495C738248BDB860043C1FE /* ContentView.swift in Sources */,
@@ -296,6 +304,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AudioPlayer/AudioPlayer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"AudioPlayer/Preview Content\"";
 				DEVELOPMENT_TEAM = A8V889ZWBY;
@@ -316,6 +325,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AudioPlayer/AudioPlayer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"AudioPlayer/Preview Content\"";
 				DEVELOPMENT_TEAM = A8V889ZWBY;
