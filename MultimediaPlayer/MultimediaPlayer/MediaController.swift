@@ -56,6 +56,59 @@ struct MediaController {
         }
     }
     
+    func seekInfoCenterHandler(filename: String?) {
+        // handler for InfoCenter seek
+        commandCenter.changePlaybackPositionCommand.removeTarget(nil)
+        commandCenter.changePlaybackPositionCommand.isEnabled = true
+        
+        // commented out section worked, but had following problems:
+        //   1. seek bubble flashed from original position to new position on release
+        //   2. result was always .commandFailed, could not modify from callback
+        //
+        // commandCenter.changePlaybackPositionCommand.addTarget { event -> MPRemoteCommandHandlerStatus in
+        //     var result: MPRemoteCommandHandlerStatus = .commandFailed
+        //
+        //     let wasPlaying = (self.player!.rate > 0.0) ? true : false
+        //
+        //     let seconds = (event as? MPChangePlaybackPositionCommandEvent)?.positionTime ?? 0
+        //     let playerTimescale = self.player?.currentItem?.asset.duration.timescale ?? 1
+        //     let time = CMTime(seconds: seconds, preferredTimescale: playerTimescale)
+        //
+        //     if (wasPlaying) {
+        //         self.player?.pause()
+        //         self.player?.rate = 0.0
+        //     }
+        //     self.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero, completionHandler: { (finish: Bool) in
+        //         if (finish) {
+        //             if (wasPlaying) {
+        //                 self.player?.play()
+        //                 self.player?.rate = 1.0
+        //             }
+        //             result = .success
+        //         }
+        //         self.update(filename: filename)
+        //     })
+        //
+        //     return result
+        // }
+        
+        commandCenter.changePlaybackPositionCommand.addTarget { remoteEvent -> MPRemoteCommandHandlerStatus in
+            if let player = self.player {
+                let playerRate = player.rate
+                if let event = remoteEvent as? MPChangePlaybackPositionCommandEvent {
+                    player.seek(to: CMTime(seconds: event.positionTime, preferredTimescale: CMTimeScale(1000)), completionHandler: { (success) in
+                        if success {
+                            self.player?.rate = playerRate
+                            self.update(filename: filename)
+                        }
+                    })
+                    return .success
+                }
+            }
+            return .commandFailed
+        }
+    }
+    
     mutating func loadMedia(url: URL?) -> String? {
         player?.pause()
         
@@ -72,6 +125,7 @@ struct MediaController {
             update(filename: filename)
             playInfoCenterHandler(filename: filename)
             pauseInfoCenterHandler(filename: filename)
+            seekInfoCenterHandler(filename: filename)
             
             return filename
         } catch {
