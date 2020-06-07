@@ -80,8 +80,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
                         if fileAttributes.isRegularFile! {
                             files.append(fileURL)
-                            //                            if uncomment this, will delete all files in /tmp/ including the one just copied
-                            //                            try FileManager.default.removeItem(atPath: fileURL.path)
+                            // if uncomment this, will delete all files in /tmp/ including the one just copied
+                            // try FileManager.default.removeItem(atPath: fileURL.path)
                         }
                     } catch {
                         print(error, fileURL)
@@ -96,4 +96,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
 }
-

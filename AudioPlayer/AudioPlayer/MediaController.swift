@@ -33,14 +33,12 @@ struct MediaController {
         // handler for InfoCenter play
         commandCenter.playCommand.removeTarget(nil)
         self.commandCenter.playCommand.addTarget { _ in
-            //                if self.player.rate == 0.0 {
             self.player?.play()
             self.player?.rate = 1.0
             
             self.update(filename: filename)
             
             return .success
-            //                return .commandFailed
         }
     }
     
@@ -54,7 +52,6 @@ struct MediaController {
             self.update(filename: filename)
             
             return .success
-            //                return .commandFailed
         }
     }
     
@@ -68,7 +65,6 @@ struct MediaController {
             try sharedInstance.setActive(true, options: .notifyOthersOnDeactivation)
             try sharedInstance.setCategory(AVAudioSession.Category.playback)
             
-            //            self.player = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
             self.player = try? AVAudioPlayer(contentsOf: url!)
             
             let filename = url?.lastPathComponent
@@ -85,7 +81,6 @@ struct MediaController {
     }
     
     mutating func loadMedia(fileURLWithPath: String, ofType: String?) -> String? {
-        //        let media = Bundle.main.path(forResource: "alright-radio-edit-kendrick-lamar", ofType: "mp3")
         let media = Bundle.main.url(forResource: fileURLWithPath, withExtension: ofType)
         
         return self.loadMedia(url: media)
@@ -106,7 +101,7 @@ struct MediaController {
         
         self.infoCenter.nowPlayingInfo = nowPlayingInfo
         
-        //        print(self.infoCenter.nowPlayingInfo!)
+        // print(self.infoCenter.nowPlayingInfo!)
     }
     
 }

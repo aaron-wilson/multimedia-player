@@ -11,7 +11,6 @@ import SwiftUI
 var mc = MediaController()
 
 struct ContentView: View {
-    //    @State var currentMedia: String = ""
     @EnvironmentObject var mediaData: MediaData
     
     var body: some View {
