@@ -12,9 +12,8 @@ import MediaPlayer
 
 struct ContentView: View {
     @State var player: AVAudioPlayer!
-    // Initialize
-    let commandCenter = MPRemoteCommandCenter.shared()
-    let infoCenter = MPNowPlayingInfoCenter.default()
+    let commandCenter: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()
+    let infoCenter: MPNowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
     
     var body: some View {
         ZStack {
@@ -36,19 +35,7 @@ struct ContentView: View {
                         self.player.play()
                         self.player.rate = 1.0
                         
-                        var nowPlayingInfo = [String : Any]()
-                        nowPlayingInfo[MPMediaItemPropertyTitle] = "Media"
-                        if let image = UIImage(named: "lockscreen") {
-                            nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
-                                return image
-                            }
-                        }
-                        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = self.player.currentTime
-                        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = self.player.duration
-                        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = self.player.rate
-                        self.infoCenter.nowPlayingInfo = nowPlayingInfo
-                        
-                        print(self.infoCenter.nowPlayingInfo!)
+                        update(player: self.player, infoCenter: self.infoCenter)
                     }) {
                         Image(systemName: "play.circle.fill")
                             .resizable()
@@ -64,19 +51,7 @@ struct ContentView: View {
                         self.player.pause()
                         self.player.rate = 0.0
                         
-                        var nowPlayingInfo = [String : Any]()
-                        nowPlayingInfo[MPMediaItemPropertyTitle] = "Media"
-                        if let image = UIImage(named: "lockscreen") {
-                            nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
-                                return image
-                            }
-                        }
-                        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = self.player.currentTime
-                        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = self.player.duration
-                        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = self.player.rate
-                        self.infoCenter.nowPlayingInfo = nowPlayingInfo
-                        
-                        print(self.infoCenter.nowPlayingInfo!)
+                        update(player: self.player, infoCenter: self.infoCenter)
                     }) {
                         Image(systemName: "pause.circle.fill")
                             .resizable()
@@ -91,89 +66,70 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            let sound = Bundle.main.path(forResource: "alright-radio-edit-kendrick-lamar", ofType: "mp3")
+            self.player = initialize()
             
-            let sharedInstance = AVAudioSession.sharedInstance()
-            
-            do {
-                try sharedInstance.setMode(.default)
-                try sharedInstance.setActive(true, options: .notifyOthersOnDeactivation)
-                try sharedInstance.setCategory(AVAudioSession.Category.playback)
-                
-                self.player = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
-            } catch {
-                print("error occurred")
-            }
-            
-            // Add handler for Play Command
+            // handler for InfoCenter play
             self.commandCenter.playCommand.addTarget { _ in
                 //                if self.player.rate == 0.0 {
                 self.player.play()
                 self.player.rate = 1.0
                 
-                var nowPlayingInfo = [String : Any]()
-                nowPlayingInfo[MPMediaItemPropertyTitle] = "Media"
-                if let image = UIImage(named: "lockscreen") {
-                    nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
-                        return image
-                    }
-                }
-                nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = self.player.currentTime
-                nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = self.player.duration
-                nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = self.player.rate
-                self.infoCenter.nowPlayingInfo = nowPlayingInfo
-                
-                print(self.infoCenter.nowPlayingInfo!)
-                
-                //                    _ = try? sharedInstance.setActive(true)
-                
-                
+                update(player: self.player, infoCenter: self.infoCenter)
                 
                 return .success
-                //                }
                 //                return .commandFailed
             }
             
-            // Add handler for Pause Command
+            // handler for InfoCenter pause
             self.commandCenter.pauseCommand.addTarget { _ in
-                //                if self.player.rate == 1.0 {
                 self.player.pause()
                 self.player.rate = 0.0
                 
-                var nowPlayingInfo = [String : Any]()
-                nowPlayingInfo[MPMediaItemPropertyTitle] = "Media"
-                if let image = UIImage(named: "lockscreen") {
-                    nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
-                        return image
-                    }
-                }
-                nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = self.player.currentTime
-                nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = self.player.duration
-                nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = self.player.rate
-                self.infoCenter.nowPlayingInfo = nowPlayingInfo
-                
-                print(self.infoCenter.nowPlayingInfo!)
-                
-                //                    _ = try? sharedInstance.setActive(false)
+                update(player: self.player, infoCenter: self.infoCenter)
                 
                 return .success
-                //                }
                 //                return .commandFailed
             }
             
-            var nowPlayingInfo = [String : Any]()
-            nowPlayingInfo[MPMediaItemPropertyTitle] = "Media"
-            if let image = UIImage(named: "lockscreen") {
-                nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { size in
-                    return image
-                }
-            }
-            nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = self.player.currentTime
-            nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = self.player.duration
-            nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = self.player.rate
-            self.infoCenter.nowPlayingInfo = nowPlayingInfo
+            update(player: self.player, infoCenter: self.infoCenter)
         }
     }
+}
+
+func initialize() -> AVAudioPlayer? {
+    let sound = Bundle.main.path(forResource: "alright-radio-edit-kendrick-lamar", ofType: "mp3")
+    
+    let sharedInstance = AVAudioSession.sharedInstance()
+    
+    do {
+        try sharedInstance.setMode(.default)
+        try sharedInstance.setActive(true, options: .notifyOthersOnDeactivation)
+        try sharedInstance.setCategory(AVAudioSession.Category.playback)
+        
+        return try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+    } catch {
+        print("error")
+    }
+    
+    return nil
+}
+
+func update(player: AVAudioPlayer, infoCenter: MPNowPlayingInfoCenter) {
+    var nowPlayingInfo = [String : Any]()
+    
+    nowPlayingInfo[MPMediaItemPropertyTitle] = "Media"
+    if let image = UIImage(named: "lockscreen") {
+        nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { _ in
+            return image
+        }
+    }
+    nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentTime
+    nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = player.duration
+    nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player.rate
+    
+    infoCenter.nowPlayingInfo = nowPlayingInfo
+    
+    print(infoCenter.nowPlayingInfo!)
 }
 
 struct ContentView_Previews: PreviewProvider {
