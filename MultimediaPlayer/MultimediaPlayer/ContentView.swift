@@ -9,6 +9,7 @@
 import SwiftUI
 
 var mc = MediaController()
+let appTitle = "Multimedia Player"
 
 struct ContentView: View {
     @EnvironmentObject var mediaData: MediaData
@@ -22,8 +23,8 @@ struct ContentView: View {
                 Spacer()
                 
                 HStack {
-                    Text("Media Player")
-                        .font(.system(size: 48))
+                    Text(appTitle)
+                        .font(.system(size: 40))
                         .fontWeight(.bold)
                         .foregroundColor(.gray)
                 }
@@ -63,8 +64,8 @@ struct ContentView: View {
                 Spacer()
                 
                 HStack {
-                    Text(self.mediaData.title)
-                        .font(.system(size: 24))
+                    Text(mediaData.title)
+                        .font(.system(size: 20))
                         .fontWeight(.bold)
                         .foregroundColor(.gray)
                 }

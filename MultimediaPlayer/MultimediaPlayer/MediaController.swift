@@ -11,20 +11,20 @@ import MediaPlayer
 
 struct MediaController {
     
-    var player: AVAudioPlayer?
+    var player: AVPlayer?
     let commandCenter: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()
     let infoCenter: MPNowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
     
     func playMedia(filename: String) {
-        self.player?.play()
-        self.player?.rate = 1.0
+        player?.play()
+        player?.rate = 1.0
         
         update(filename: filename)
     }
     
     func pauseMedia(filename: String) {
-        self.player?.pause()
-        self.player?.rate = 0.0
+        player?.pause()
+        player?.rate = 0.0
         
         update(filename: filename)
     }
@@ -32,7 +32,7 @@ struct MediaController {
     func playInfoCenterHandler(filename: String?) {
         // handler for InfoCenter play
         commandCenter.playCommand.removeTarget(nil)
-        self.commandCenter.playCommand.addTarget { _ in
+        commandCenter.playCommand.addTarget { _ in
             self.player?.play()
             self.player?.rate = 1.0
             
@@ -45,7 +45,7 @@ struct MediaController {
     func pauseInfoCenterHandler(filename: String?) {
         // handler for InfoCenter pause
         commandCenter.pauseCommand.removeTarget(nil)
-        self.commandCenter.pauseCommand.addTarget { _ in
+        commandCenter.pauseCommand.addTarget { _ in
             self.player?.pause()
             self.player?.rate = 0.0
             
@@ -56,7 +56,7 @@ struct MediaController {
     }
     
     mutating func loadMedia(url: URL?) -> String? {
-        self.player?.pause()
+        player?.pause()
         
         let sharedInstance = AVAudioSession.sharedInstance()
         
@@ -65,12 +65,12 @@ struct MediaController {
             try sharedInstance.setActive(true, options: .notifyOthersOnDeactivation)
             try sharedInstance.setCategory(AVAudioSession.Category.playback)
             
-            self.player = try? AVAudioPlayer(contentsOf: url!)
+            player = AVPlayer(url: url!)
             
             let filename = url?.lastPathComponent
-            self.update(filename: filename)
-            self.playInfoCenterHandler(filename: filename)
-            self.pauseInfoCenterHandler(filename: filename)
+            update(filename: filename)
+            playInfoCenterHandler(filename: filename)
+            pauseInfoCenterHandler(filename: filename)
             
             return filename
         } catch {
@@ -83,7 +83,7 @@ struct MediaController {
     mutating func loadMedia(fileURLWithPath: String, ofType: String?) -> String? {
         let media = Bundle.main.url(forResource: fileURLWithPath, withExtension: ofType)
         
-        return self.loadMedia(url: media)
+        return loadMedia(url: media)
     }
     
     func update(filename: String?) {
@@ -95,13 +95,13 @@ struct MediaController {
                 return image
             }
         }
-        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = self.player?.currentTime
-        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = self.player?.duration
-        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = self.player?.rate
+        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player?.currentTime().seconds
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = player?.currentItem?.asset.duration.seconds
+        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player?.rate
         
-        self.infoCenter.nowPlayingInfo = nowPlayingInfo
+        infoCenter.nowPlayingInfo = nowPlayingInfo
         
-        // print(self.infoCenter.nowPlayingInfo!)
+        // print(infoCenter.nowPlayingInfo!)
     }
     
 }
