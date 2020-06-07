@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8495C730248BDB860043C1FE /* AudioPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8495C730248BDB860043C1FE /* MultimediaPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultimediaPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8495C733248BDB860043C1FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8495C735248BDB860043C1FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8495C737248BDB860043C1FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,7 +47,7 @@
 			isa = PBXGroup;
 			children = (
 				84A8C38A248BF6E800D1486C /* Files */,
-				8495C732248BDB860043C1FE /* AudioPlayer */,
+				8495C732248BDB860043C1FE /* MultimediaPlayer */,
 				8495C731248BDB860043C1FE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,12 +55,12 @@
 		8495C731248BDB860043C1FE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8495C730248BDB860043C1FE /* AudioPlayer.app */,
+				8495C730248BDB860043C1FE /* MultimediaPlayer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8495C732248BDB860043C1FE /* AudioPlayer */ = {
+		8495C732248BDB860043C1FE /* MultimediaPlayer */ = {
 			isa = PBXGroup;
 			children = (
 				8495C733248BDB860043C1FE /* AppDelegate.swift */,
@@ -73,7 +73,7 @@
 				8495C741248BDB880043C1FE /* Info.plist */,
 				8495C73B248BDB880043C1FE /* Preview Content */,
 			);
-			path = AudioPlayer;
+			path = MultimediaPlayer;
 			sourceTree = "<group>";
 		};
 		8495C73B248BDB880043C1FE /* Preview Content */ = {
@@ -95,9 +95,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8495C72F248BDB860043C1FE /* AudioPlayer */ = {
+		8495C72F248BDB860043C1FE /* MultimediaPlayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8495C744248BDB880043C1FE /* Build configuration list for PBXNativeTarget "AudioPlayer" */;
+			buildConfigurationList = 8495C744248BDB880043C1FE /* Build configuration list for PBXNativeTarget "MultimediaPlayer" */;
 			buildPhases = (
 				8495C72C248BDB860043C1FE /* Sources */,
 				8495C72D248BDB860043C1FE /* Frameworks */,
@@ -107,9 +107,9 @@
 			);
 			dependencies = (
 			);
-			name = AudioPlayer;
-			productName = AudioPlayer;
-			productReference = 8495C730248BDB860043C1FE /* AudioPlayer.app */;
+			name = MultimediaPlayer;
+			productName = MultimediaPlayer;
+			productReference = 8495C730248BDB860043C1FE /* MultimediaPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -127,7 +127,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8495C72B248BDB860043C1FE /* Build configuration list for PBXProject "AudioPlayer" */;
+			buildConfigurationList = 8495C72B248BDB860043C1FE /* Build configuration list for PBXProject "MultimediaPlayer" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -140,7 +140,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8495C72F248BDB860043C1FE /* AudioPlayer */,
+				8495C72F248BDB860043C1FE /* MultimediaPlayer */,
 			);
 		};
 /* End PBXProject section */
@@ -307,15 +307,15 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"AudioPlayer/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MultimediaPlayer/Preview Content\"";
 				DEVELOPMENT_TEAM = A8V889ZWBY;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = AudioPlayer/Info.plist;
+				INFOPLIST_FILE = MultimediaPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.company.AudioPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.MultimediaPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -330,15 +330,15 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"AudioPlayer/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MultimediaPlayer/Preview Content\"";
 				DEVELOPMENT_TEAM = A8V889ZWBY;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = AudioPlayer/Info.plist;
+				INFOPLIST_FILE = MultimediaPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.company.AudioPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.company.MultimediaPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -349,7 +349,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8495C72B248BDB860043C1FE /* Build configuration list for PBXProject "AudioPlayer" */ = {
+		8495C72B248BDB860043C1FE /* Build configuration list for PBXProject "MultimediaPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8495C742248BDB880043C1FE /* Debug */,
@@ -358,7 +358,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8495C744248BDB880043C1FE /* Build configuration list for PBXNativeTarget "AudioPlayer" */ = {
+		8495C744248BDB880043C1FE /* Build configuration list for PBXNativeTarget "MultimediaPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8495C745248BDB880043C1FE /* Debug */,

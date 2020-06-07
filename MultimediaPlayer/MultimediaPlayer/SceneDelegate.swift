@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  AudioPlayer
+//  MultimediaPlayer
 //
 //  Created by Admin on 6/6/20.
 //  Copyright © 2020 Admin. All rights reserved.
@@ -71,10 +71,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 print("file not available")
             }
             
-            print("listing all files in /tmp/")
             let tmpDirURL = FileManager.default.temporaryDirectory
             var files = [URL]()
             if let enumerator = FileManager.default.enumerator(at: tmpDirURL, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
+                print("listing all files in /tmp/")
+                
                 for case let fileURL as URL in enumerator {
                     do {
                         let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
@@ -87,6 +88,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         print(error, fileURL)
                     }
                 }
+                
                 print(files)
                 print("\(files.count) files in /tmp/")
             }

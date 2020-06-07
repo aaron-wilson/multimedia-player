@@ -1,6 +1,6 @@
 //
 //  MediaController.swift
-//  AudioPlayer
+//  MultimediaPlayer
 //
 //  Created by admin on 6/6/20.
 //  Copyright © 2020 Admin. All rights reserved.

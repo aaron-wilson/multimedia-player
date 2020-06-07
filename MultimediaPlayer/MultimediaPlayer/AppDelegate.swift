@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  AudioPlayer
+//  MultimediaPlayer
 //
 //  Created by Admin on 6/6/20.
 //  Copyright © 2020 Admin. All rights reserved.
