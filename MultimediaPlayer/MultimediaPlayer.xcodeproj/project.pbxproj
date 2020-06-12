@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		846CBAB92494003000341547 /* Playback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CBAB82494003000341547 /* Playback.swift */; };
+		846CBABB2494038A00341547 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CBABA2494038A00341547 /* Utils.swift */; };
 		8495C734248BDB860043C1FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8495C733248BDB860043C1FE /* AppDelegate.swift */; };
 		8495C736248BDB860043C1FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8495C735248BDB860043C1FE /* SceneDelegate.swift */; };
 		8495C738248BDB860043C1FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8495C737248BDB860043C1FE /* ContentView.swift */; };
@@ -15,10 +17,12 @@
 		8495C740248BDB880043C1FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8495C73E248BDB880043C1FE /* LaunchScreen.storyboard */; };
 		8495C749248BE10E0043C1FE /* alright-radio-edit-kendrick-lamar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8495C748248BE10E0043C1FE /* alright-radio-edit-kendrick-lamar.mp3 */; };
 		84EB40AD248C81B60003D206 /* MediaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB40AC248C81B60003D206 /* MediaController.swift */; };
-		84EB40B2248CA6420003D206 /* MediaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB40B1248CA6420003D206 /* MediaData.swift */; };
+		84EB40B2248CA6420003D206 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB40B1248CA6420003D206 /* Store.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		846CBAB82494003000341547 /* Playback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playback.swift; sourceTree = "<group>"; };
+		846CBABA2494038A00341547 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		8495C730248BDB860043C1FE /* MultimediaPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultimediaPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8495C733248BDB860043C1FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8495C735248BDB860043C1FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -29,7 +33,7 @@
 		8495C741248BDB880043C1FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8495C748248BE10E0043C1FE /* alright-radio-edit-kendrick-lamar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "alright-radio-edit-kendrick-lamar.mp3"; sourceTree = "<group>"; };
 		84EB40AC248C81B60003D206 /* MediaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaController.swift; sourceTree = "<group>"; };
-		84EB40B1248CA6420003D206 /* MediaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaData.swift; sourceTree = "<group>"; };
+		84EB40B1248CA6420003D206 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +71,9 @@
 				8495C735248BDB860043C1FE /* SceneDelegate.swift */,
 				8495C737248BDB860043C1FE /* ContentView.swift */,
 				84EB40AC248C81B60003D206 /* MediaController.swift */,
-				84EB40B1248CA6420003D206 /* MediaData.swift */,
+				84EB40B1248CA6420003D206 /* Store.swift */,
+				846CBAB82494003000341547 /* Playback.swift */,
+				846CBABA2494038A00341547 /* Utils.swift */,
 				8495C739248BDB880043C1FE /* Assets.xcassets */,
 				8495C73E248BDB880043C1FE /* LaunchScreen.storyboard */,
 				8495C741248BDB880043C1FE /* Info.plist */,
@@ -164,10 +170,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84EB40B2248CA6420003D206 /* MediaData.swift in Sources */,
+				84EB40B2248CA6420003D206 /* Store.swift in Sources */,
 				84EB40AD248C81B60003D206 /* MediaController.swift in Sources */,
 				8495C734248BDB860043C1FE /* AppDelegate.swift in Sources */,
+				846CBABB2494038A00341547 /* Utils.swift in Sources */,
 				8495C736248BDB860043C1FE /* SceneDelegate.swift in Sources */,
+				846CBAB92494003000341547 /* Playback.swift in Sources */,
 				8495C738248BDB860043C1FE /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

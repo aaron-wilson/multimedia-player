@@ -1,5 +1,5 @@
 //
-//  MediaData.swift
+//  Store.swift
 //  MultimediaPlayer
 //
 //  Created by admin on 6/7/20.
@@ -9,7 +9,8 @@
 import Foundation
 import AVKit
 
-class MediaData: ObservableObject {
+class Store: ObservableObject {
     @Published var title: String? = nil
     @Published var videoPlayer: VideoPlayer? = nil
+    @Published var playbacks: [Playback]? = nil
 }

@@ -8,11 +8,8 @@
 
 import SwiftUI
 
-var mc = MediaController()
-let appTitle = "Multimedia Player"
-
 struct ContentView: View {
-    @EnvironmentObject var mediaData: MediaData
+    @EnvironmentObject var store: Store
     @State var showPlayerView = false
     
     var body: some View {
@@ -22,7 +19,7 @@ struct ContentView: View {
                     .black
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    NavigationLink(destination: PlayerView(videoPlayer: mediaData.videoPlayer), isActive: $showPlayerView) {
+                    NavigationLink(destination: PlayerView(videoPlayer: store.videoPlayer), isActive: $showPlayerView) {
                         EmptyView()
                     }
                     
@@ -41,11 +38,12 @@ struct ContentView: View {
                         
                         // play button
                         Button(action: {
-                            if (self.mediaData.videoPlayer != nil) {
+                            if (self.store.videoPlayer != nil) {
                                 self.showPlayerView = true
+                                mc.update()
                             } else {
                                 self.showPlayerView = false
-                                mc.playMedia(filename: self.mediaData.title!)
+                                mc.playMedia(filename: self.store.title!)
                             }
                         }) {
                             Image(systemName: "play.circle.fill")
@@ -59,7 +57,7 @@ struct ContentView: View {
                         
                         // pause button
                         Button(action: {
-                            mc.pauseMedia(filename: self.mediaData.title!)
+                            mc.pauseMedia(filename: self.store.title!)
                         }) {
                             Image(systemName: "pause.circle.fill")
                                 .resizable()
@@ -74,8 +72,8 @@ struct ContentView: View {
                     Spacer()
                     
                     HStack {
-                        if (mediaData.title != nil) {
-                            Text(mediaData.title!)
+                        if (store.title != nil) {
+                            Text(store.title!)
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
                                 .foregroundColor(.gray)
@@ -83,11 +81,20 @@ struct ContentView: View {
                     }
                     
                     Spacer()
+                    
+                    NavigationLink(destination: HistoryView(playbacks: store.playbacks)) {
+                        Text("History")
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                    }
+                    
+                    Spacer()
                 }
             }
             .onAppear {
-                if (self.mediaData.title == nil) {
-                    self.mediaData.title = mc.loadMedia(fileURLWithPath: "alright-radio-edit-kendrick-lamar", ofType: "mp3")!
+                if (self.store.title == nil) {
+                    self.store.title = mc.loadMedia(fileURLWithPath: "alright-radio-edit-kendrick-lamar", ofType: "mp3")!
+                    mc.updatePlaybacks()
                 }
             }
         }
@@ -104,6 +111,25 @@ struct PlayerView: View {
             
             Spacer()
         }
+    }
+}
+
+struct HistoryView: View {
+    var playbacks: [Playback]?
+    
+    var body: some View {
+        List(playbacks ?? []) { playback in
+            VStack(alignment: .leading) {
+                Text(playback.filename)
+                    .fontWeight(.bold)
+                
+                Spacer()
+                
+                Text("\(secondsToDuration(seconds: playback.position)) / \(secondsToDuration(seconds: playback.duration))")
+            }
+        }
+        .navigationBarTitle("History")
+        .foregroundColor(.gray)
     }
 }
 

@@ -13,6 +13,7 @@ import SwiftUI
 struct MediaController {
     
     var player: AVPlayer?
+    var currentFilename: String?
     let commandCenter: MPRemoteCommandCenter = MPRemoteCommandCenter.shared()
     let infoCenter: MPNowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
     
@@ -127,6 +128,8 @@ struct MediaController {
             pauseInfoCenterHandler(filename: filename)
             seekInfoCenterHandler(filename: filename)
             
+            currentFilename = filename
+            
             return filename
         } catch {
             print("error")
@@ -150,13 +153,60 @@ struct MediaController {
                 return image
             }
         }
-        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player?.currentTime().seconds
-        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = player?.currentItem?.asset.duration.seconds
-        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player?.rate
+        
+        let position = player?.currentTime().seconds
+        let duration = player?.currentItem?.asset.duration.seconds
+        let rate = player?.rate
+        
+        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = position
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = duration
+        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = rate
         
         infoCenter.nowPlayingInfo = nowPlayingInfo
         
+        if position ?? 0 > 0 {
+            updatePlaybacks(filename: filename!, position: position!, duration: duration!)
+        }
+        
         // print(infoCenter.nowPlayingInfo!)
+    }
+    
+    func update() {
+        if (currentFilename != nil) {
+            update(filename: currentFilename)
+        }
+    }
+    
+    func updatePlaybacks() {
+        // fetch playbacks from UserDefaults
+        var userDefaultsPlaybacks: [Playback]? = nil
+        if let data = UserDefaults.standard.object(forKey: "playbacks") as? Data {
+            if let decodedData = try? JSONDecoder().decode([Playback].self, from: data) {
+//                print("Fetching playbacks from UserDefaults: \(decodedData)")
+                userDefaultsPlaybacks = decodedData
+            }
+        }
+        
+        // update store.playbacks to match UserDefaults
+        store.playbacks = userDefaultsPlaybacks
+    }
+    
+    func updatePlaybacks(filename: String, position: Double, duration: Double) {
+        updatePlaybacks()
+        
+        // create updatedPlaybacks with new Playback on top of store.playbacks
+        let filteredPlaybacks = store.playbacks?.filter {
+            $0.filename.lowercased() != filename.lowercased()
+        }
+        let updatedPlaybacks = [Playback(filename: filename, position: position, duration: duration)] + (filteredPlaybacks ?? [])
+        
+        // save updatedPlaybacks to UserDefaults
+        if let encodedData = try? JSONEncoder().encode(updatedPlaybacks) {
+            UserDefaults.standard.set(encodedData, forKey: "playbacks")
+        }
+        
+        // save updatedPlaybacks to store.playbacks
+        store.playbacks = updatedPlaybacks
     }
     
     func loadVideoPlayer() -> VideoPlayer {
