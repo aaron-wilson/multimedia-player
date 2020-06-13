@@ -92,10 +92,10 @@ struct ContentView: View {
                 }
             }
             .onAppear {
-                if (self.store.title == nil) {
-                    self.store.title = mc.loadMedia(fileURLWithPath: "alright-radio-edit-kendrick-lamar", ofType: "mp3")!
-                    mc.updatePlaybacks()
-                }
+                mc.updatePlaybacks()
+//                if (self.store.title == nil) {
+//                    self.store.title = mc.loadMedia(fileURLWithPath: "alright-radio-edit-kendrick-lamar", ofType: "mp3")!
+//                }
             }
         }
     }

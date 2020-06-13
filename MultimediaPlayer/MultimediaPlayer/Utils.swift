@@ -9,12 +9,10 @@
 import Foundation
 
 func secondsToDuration(seconds: Double) -> String {
-    let duration: TimeInterval = seconds
-
     let formatter = DateComponentsFormatter()
     formatter.unitsStyle = .positional
     formatter.allowedUnits = [ .hour, .minute, .second ]
     formatter.zeroFormattingBehavior = [ .pad ]
 
-    return formatter.string(from: duration)!
+    return formatter.string(from: seconds)!
 }
